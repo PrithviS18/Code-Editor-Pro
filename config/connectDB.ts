@@ -16,6 +16,7 @@ type MongooseConnection = Awaited<ReturnType<typeof mongoose.connect>>;
 
 declare global {
     var mongoose: {
+        Types: any;
         conn: MongooseConnection | null;
         promise: Promise<MongooseConnection> | null;
     };
