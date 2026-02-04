@@ -12,7 +12,7 @@ import { toast } from 'react-toastify'
 
 const CreateProject = () => {
     const [projectName, setProjectName] = useState<string>('');
-    const [language, setLanguage] = useState<string>('cpp');
+    const [language, setLanguage] = useState<string>('');
     const [open, setOpen] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const session = useSession();
@@ -63,20 +63,20 @@ const CreateProject = () => {
                         <Input className='my-4' value={projectName} onChange={(e) => setProjectName(e.target.value)} placeholder='Enter Project Name' />
                         <DropdownMenu >
                             <DropdownMenuTrigger asChild>
-                                <Button disabled={isLoading} variant="outline" className='w-full'>Choose Language</Button>
+                                <Button disabled={isLoading} variant="outline" className='w-full'>{language? language.toUpperCase(): "Choose Language"}</Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent className="w-full">
                                 <DropdownMenuGroup>
                                     <DropdownMenuRadioGroup value={language} onValueChange={setLanguage}>
                                         <DropdownMenuRadioItem value="cpp">C++</DropdownMenuRadioItem>
-                                        <DropdownMenuRadioItem value="python">Python</DropdownMenuRadioItem>
-                                        <DropdownMenuRadioItem value="javascript">JavaScript</DropdownMenuRadioItem>
-                                        <DropdownMenuRadioItem value="java">Java</DropdownMenuRadioItem>
+                                        <DropdownMenuRadioItem value="python">PYTHON</DropdownMenuRadioItem>
+                                        <DropdownMenuRadioItem value="javascript">JAVASCRIPT</DropdownMenuRadioItem>
+                                        <DropdownMenuRadioItem value="java">JAVA</DropdownMenuRadioItem>
 
                                         {session.data?.user?.subscription ?
                                             <>
-                                                <DropdownMenuRadioItem value="kotlin">Kotlin</DropdownMenuRadioItem>
-                                                <DropdownMenuRadioItem value="go">Go</DropdownMenuRadioItem>
+                                                <DropdownMenuRadioItem value="kotlin">KOTLIN</DropdownMenuRadioItem>
+                                                <DropdownMenuRadioItem value="go">GO</DropdownMenuRadioItem>
                                             </> :
                                             <DropdownMenuLabel>Buy Premium to Unlock More Languages</DropdownMenuLabel>
                                         }
