@@ -1,12 +1,13 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import EditorHeader from './_component/EditorHeader'
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import CodingArea from './_component/CodingArea';
 import InputArea from './_component/InputArea';
 import OutputArea from './_component/OutputArea';
 import Axios from '@/lib/axios';
 import { toast } from 'react-toastify';
+import { useSession } from 'next-auth/react';
 
 interface Project {
   _id: string;
@@ -17,6 +18,14 @@ interface Project {
 
 
 const EditorPage = () => {
+
+  const session = useSession();
+  const router = useRouter();
+
+  if (!session){
+    router.push('/login');
+  }
+
   const { projectId } = useParams<{ projectId: string }>();
   const [code, setCode] = useState<string>("");
   const [project, setProject] = useState<Project | null>(null);
