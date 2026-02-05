@@ -7,6 +7,7 @@ import InputArea from './_component/InputArea';
 import OutputArea from './_component/OutputArea';
 import Axios from '@/lib/axios';
 import { toast } from 'react-toastify';
+import { useSession } from 'next-auth/react';
 
 
 interface Project {
@@ -19,6 +20,8 @@ interface Project {
 
 const EditorPage = () => {
 
+
+  const session = useSession();
 
   const { projectId } = useParams<{ projectId: string }>();
   const [code, setCode] = useState<string>("");
@@ -99,7 +102,7 @@ const EditorPage = () => {
       const res = await Axios.post("/api/snippet", {
         code,
         language: project.language,
-        createdBy: name,
+        createdBy: session.data?.user.name,
       });
 
       const origin =

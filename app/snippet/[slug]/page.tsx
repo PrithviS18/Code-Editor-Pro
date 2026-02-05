@@ -16,6 +16,6 @@ export default async function SnippetPage({
   }
 
   const { snippet } = await res.json();
-
+  console.log(snippet);
   return <SnippetClient snippet={snippet} />;
 }
