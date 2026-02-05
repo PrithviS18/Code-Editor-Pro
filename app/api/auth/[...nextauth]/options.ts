@@ -25,6 +25,7 @@ declare module "next-auth" {
     user: {
       id?: string;
       subscription?: boolean;
+      name?: string,
     };
   }
 }
@@ -37,6 +38,7 @@ declare module "next-auth/jwt" {
   interface JWT {
     id?: string;
     subscription?: boolean;
+    name?: string;
   }
 }
 
@@ -137,6 +139,7 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.id = user.id;
         token.subscription = user.subscription;
+        token.name = user.name ?? undefined;
       }
       return token;
     },
@@ -149,6 +152,7 @@ export const authOptions: NextAuthOptions = {
       if (session.user) {
         session.user.id = token.id as string;
         session.user.subscription = token.subscription as boolean;
+        session.user.name = token.name as string;
       }
       return session;
     },

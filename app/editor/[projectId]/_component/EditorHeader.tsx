@@ -31,7 +31,7 @@ const EditorHeader = ({runCode, name, setName, running, saveProject , shareSnipp
 
             {/* Back Button */}
             <Button className='bg-secondary hover:bg-gray-400 cursor-pointer text-black' onClick={()=>router.back()}>
-                <MdOutlineArrowBack style={{ width: "20px", height: "20px" }}/>
+                <MdOutlineArrowBack />
             </Button>
 
             {/* Project Name */}
@@ -39,12 +39,12 @@ const EditorHeader = ({runCode, name, setName, running, saveProject , shareSnipp
 
             {/* Save Button */}
             <Button className='bg-secondary hover:bg-gray-400 cursor-pointer text-black' onClick={saveProject}>
-                <FaRegSave style={{ width: "20px", height: "20px" }}/> 
+                <FaRegSave /> 
             </Button>
 
             {/* Share Button */}
             <Button className='bg-secondary hover:bg-gray-400 cursor-pointer text-black' onClick={shareSnippet}>
-                <RiShareForwardFill style={{ width: "30px", height: "30px" }} /> 
+                <RiShareForwardFill /> 
             </Button>
         </div>
 
@@ -58,7 +58,7 @@ const EditorHeader = ({runCode, name, setName, running, saveProject , shareSnipp
             <Button className='cursor-pointer' onClick={runCode}>
                 {running? <span className='font-semibold text-lg'>Running...</span>:
                 <>
-                <VscRunAll style={{ width: "22px", height: "22px" }}/>
+                <VscRunAll />
                 <span className='font-semibold text-lg'>Run</span>
                 </>
             }

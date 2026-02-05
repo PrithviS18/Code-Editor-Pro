@@ -50,8 +50,8 @@ const PopUp = () => {
         <PopoverTrigger asChild>
           <Button variant="outline" className='p-0 rounded-full cursor-pointer h-12 w-12 border-black'>
             <Avatar className='w-full h-full'>
-              <AvatarImage src={session.data?.user?.image} />
-              <AvatarFallback className='text-black'>{session.data?.user?.name[0].toUpperCase()}</AvatarFallback>
+              <AvatarImage src={""} />
+              <AvatarFallback className='text-black'>{session.data?.user?.name?.[0]?.toUpperCase() || 'U'}</AvatarFallback>
             </Avatar>
           </Button>
         </PopoverTrigger>

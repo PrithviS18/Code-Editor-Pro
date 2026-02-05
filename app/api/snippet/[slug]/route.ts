@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import connectDB from "@/config/connectDB";
 import SnippetModel from "@/models/Snippet";
 
+export const runtime = "nodejs";
+
 export async function GET(
     req: Request,
     context: { params: Promise<{ slug: string }> }

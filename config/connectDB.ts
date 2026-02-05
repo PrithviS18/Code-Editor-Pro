@@ -14,12 +14,13 @@ if (!MONGODB_URI) {
 */
 type MongooseConnection = Awaited<ReturnType<typeof mongoose.connect>>;
 
+type MongooseCache = {
+  conn: typeof mongoose | null;
+  promise: Promise<typeof mongoose> | null;
+};
+
 declare global {
-    var mongoose: {
-        Types: any;
-        conn: MongooseConnection | null;
-        promise: Promise<MongooseConnection> | null;
-    };
+    var mongoose: MongooseCache | undefined ;
 }
 
 /*
@@ -35,49 +36,17 @@ if (!cached) {
     };
 }
 
-/*
-  Main function to connect to MongoDB.
-  It returns a connected mongoose instance.
-*/
-async function connectDB(): Promise<ReturnType<typeof mongoose.connect>> {
+const connectDB = async () => {
+  if (cached!.conn) {
+    return cached!.conn;
+  }
 
-    /*
-      If a connection already exists, reuse it.
-      This avoids creating multiple MongoDB connections.
-    */
-    if (cached.conn) {
-        return cached.conn;
-    }
+  if (!cached!.promise) {
+    cached!.promise = mongoose.connect(process.env.MONGODB_URI!);
+  }
 
-    /*
-      If there is no ongoing connection promise,
-      create one and store it in the global cache.
-    */
-    if (!cached.promise) {
-        cached.promise = mongoose.connect(MONGODB_URI, {
-            /*
-              Disables mongoose buffering.
-              Recommended for serverless environments.
-            */
-            bufferCommands: false,
-        });
-    }
+  cached!.conn = await cached!.promise;
+  return cached!.conn;
+};
 
-    /*
-      Await the connection promise and store
-      the resolved connection for reuse.
-    */
-    cached.conn = await cached.promise;
-
-    /*
-      Return the active MongoDB connection.
-    */
-    return cached.conn;
-}
-
-/*
-  Export the connection function.
-  It can be safely called in API routes, server actions,
-  or Server Components.
-*/
 export default connectDB;

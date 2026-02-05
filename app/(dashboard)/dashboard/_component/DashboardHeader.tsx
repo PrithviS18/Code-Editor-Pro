@@ -20,7 +20,7 @@ const DashboardHeader = () => {
 
 
       <div className="hidden md:block">
-        <span className='font-semibold'>Hi Welcome {session.data?.user?.name.split(' ')[0]} !!!</span>
+        <span className='font-semibold'>Hi Welcome {session.data?.user?.name?.split(' ')[0] || 'User'} !!!</span>
       </div>
 
       <div className="ml-auto hidden md:block">
