@@ -10,7 +10,7 @@ import { MdOutlineArrowBack } from "react-icons/md";
 import { useRouter } from 'next/navigation'
 import { FaRegSave } from "react-icons/fa";
 import { RiShareForwardFill } from "react-icons/ri";
-import { VscRunAll } from "react-icons/vsc";
+import { FaPlay } from "react-icons/fa";
 
 interface Props{
     name: string;
@@ -58,7 +58,7 @@ const EditorHeader = ({runCode, name, setName, running, saveProject , shareSnipp
             <Button className='cursor-pointer' onClick={runCode}>
                 {running? <span className='font-semibold text-lg'>Running...</span>:
                 <>
-                <VscRunAll />
+                <FaPlay />
                 <span className='font-semibold text-lg'>Run</span>
                 </>
             }
