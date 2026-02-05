@@ -7,7 +7,7 @@ import InputArea from './_component/InputArea';
 import OutputArea from './_component/OutputArea';
 import Axios from '@/lib/axios';
 import { toast } from 'react-toastify';
-import { useSession } from 'next-auth/react';
+
 
 interface Project {
   _id: string;
@@ -19,12 +19,6 @@ interface Project {
 
 const EditorPage = () => {
 
-  const session = useSession();
-  const router = useRouter();
-
-  if (!session){
-    router.push('/login');
-  }
 
   const { projectId } = useParams<{ projectId: string }>();
   const [code, setCode] = useState<string>("");
@@ -96,7 +90,7 @@ const EditorPage = () => {
   }
 
   const shareSnippet = async () => {
-    try{
+    try {
       if (!project) {
         toast.error("Project not loaded");
         return;
@@ -107,21 +101,24 @@ const EditorPage = () => {
         language: project.language,
         createdBy: name,
       });
-      
-      const url = `${window.location.origin}/snippet/${res.data.slug}`;
+
+      const origin =
+        typeof window !== "undefined" ? window.location.origin : "";
+
+      const url = `${origin}/snippet/${res.data.slug}`;
       console.log(res);
       navigator.clipboard.writeText(url);
-      
+
       toast.success("Share Link Copied")
-    }catch(error: any){
+    } catch (error: any) {
       console.log(error);
     }
   }
 
   return (
     <div className='w-full'>
-      <EditorHeader runCode={runCode} name={name} setName={setName} 
-       running={running} saveProject={saveProject}  shareSnippet={shareSnippet}/>
+      <EditorHeader runCode={runCode} name={name} setName={setName}
+        running={running} saveProject={saveProject} shareSnippet={shareSnippet} />
 
       <div className="w-full flex flex-col justify-center items-center gap-4">
         <div className="w-full m-1">
