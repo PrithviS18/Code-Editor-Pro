@@ -35,7 +35,7 @@ const DashboardPage = () => {
         console.log("yes")
         const getAllProjects = async () => {
             try {
-                const response = await Axios.get("/project/getAllProjects");
+                const response = await Axios.get("/api/project/getAllProjects");
 
 
                 if (response.status === 200) {

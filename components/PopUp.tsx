@@ -12,7 +12,7 @@ const PopUp = () => {
   const session = useSession();
   
   const handlePayment = async () => {
-    const response = await Axios.post('/payment/order');
+    const response = await Axios.post('/api/payment/order');
     const {order} = response.data;
 
     const options = {
@@ -24,7 +24,7 @@ const PopUp = () => {
       order_id: order.id,
       handler:async function (response: any){
         try{
-          const res = await Axios.post('/payment/verify',{
+          const res = await Axios.post('/api/payment/verify',{
             razorpay_order_id: response.razorpay_order_id,
             razorpay_payment_id: response.razorpay_payment_id,
             razorpay_signature: response.razorpay_signature,

@@ -27,7 +27,7 @@ const CreateProject = () => {
         setIsLoading(true);
 
         try {
-            const response = await Axios.post('/project/createProject', {
+            const response = await Axios.post('/api/project/createProject', {
                 name: projectName,
                 language: language
             })

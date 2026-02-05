@@ -49,7 +49,7 @@ const registerPage = () => {
     try {
       setIsLoading(true);
 
-      const response = await Axios.post('/auth/register', {
+      const response = await Axios.post('/api/auth/register', {
         name: data.name,
         email: data.email,
         password: data.password

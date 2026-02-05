@@ -30,7 +30,7 @@ const EditorPage = () => {
     const getProject = async () => {
       try {
 
-        const response = await Axios.get(`/project/${projectId}`);
+        const response = await Axios.get(`/api/project/${projectId}`);
         setProject(response.data.project)
         setCode(response.data.project.code)
         setName(response.data.project.name)
@@ -51,11 +51,13 @@ const EditorPage = () => {
       setRunning(true);
       setOutput("");
 
-      const response = await Axios.post('/project/execute', {
+      const response = await Axios.post('/api/project/execute', {
         code,
         language: project.language,
         input,
       })
+
+      console.log(response);
       if (response.data.compileError) {
         setOutput(response.data.compileError);
       }
@@ -74,7 +76,7 @@ const EditorPage = () => {
 
   const saveProject = async () => {
     try {
-      const response = await Axios.post('/project/saveProject', { _id: project?._id, name, code });
+      const response = await Axios.post('/api/project/saveProject', { _id: project?._id, name, code });
 
       if (response.status === 200) {
         toast.success("Code Saved Successfully!!")
@@ -91,7 +93,7 @@ const EditorPage = () => {
         return;
       }
 
-      const res = await Axios.post("/snippet", {
+      const res = await Axios.post("/api/snippet", {
         code,
         language: project.language,
         createdBy: name,
